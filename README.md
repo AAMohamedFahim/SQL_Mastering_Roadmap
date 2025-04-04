@@ -1,7 +1,5 @@
 # Comprehensive SQL Study Plan
 
-![SQL Banner](https://www.sqlbannerimage.com)
-
 ## Navigation
 - [Introduction](#introduction)
 - [Study Plan](#study-plan)
