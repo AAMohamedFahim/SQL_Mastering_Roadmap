@@ -1,130 +1,116 @@
-# Day 11: SQL Joins Deep Dive 🔄
+# Day 11: String Functions 🎯
 
 ## 🧭 Navigation
 - [Overview](#overview)
 - [Objectives](#objectives)
-- [Types of Joins](#types-of-joins)
-  - [1. INNER JOIN](#1-inner-join)
-  - [2. LEFT JOIN](#2-left-join)
-  - [3. RIGHT JOIN](#3-right-join)
-  - [4. FULL OUTER JOIN](#4-full-outer-join)
-  - [5. CROSS JOIN](#5-cross-join)
-  - [6. SELF JOIN](#6-self-join)
-- [Visual Guide](#visual-guide)
-- [Practice Scenarios](#practice-scenarios)
-- [Next Up](#next-up)
+- [Common String Functions](#common-string-functions)
+  - [1. UPPER()](#1-upper)
+  - [2. LOWER()](#2-lower)
+  - [3. CONCAT()](#3-concat)
+  - [4. SUBSTRING()](#4-substring)
+  - [5. TRIM()](#5-trim)
+- [🧪 Practice Scenarios](#practice-scenarios)
+- [🧠 Tips](#tips)
+- [🔜 Next Up](#next-up)
 
 ---
 
 ## 📖 Overview
-Joins combine rows from two or more tables based on related columns. They're the backbone of relational databases and key to data analysis.
+String functions in SQL allow you to manipulate and transform text data. These are crucial for cleaning, formatting, and standardizing string fields like names, emails, and IDs.
 
 ---
 
 ## 🎯 Objectives
-- Understand all types of SQL joins.
-- Learn when to use each join type.
-- Write join queries to answer real-world questions.
+- Learn the most commonly used string functions in SQL
+- Understand how to clean and format string data
+- Chain multiple functions together for powerful transformations
 
 ---
 
-## 🔗 Types of Joins
+## 🧵 Common String Functions
 
-### 1. INNER JOIN
-Returns rows where there is a **match in both tables**.
+### 1. UPPER()
+Converts a string to **uppercase**.
 
 ```sql
-SELECT *
-FROM orders
-INNER JOIN customers ON orders.customer_id = customers.id;
+SELECT UPPER('mohamed') AS upper_name;
+-- Result: MOHAMED
 ```
 
 ---
 
-### 2. LEFT JOIN (or LEFT OUTER JOIN)
-Returns **all rows from the left table** and matching rows from the right.
+### 2. LOWER()
+Converts a string to **lowercase**.
 
 ```sql
-SELECT *
-FROM customers
-LEFT JOIN orders ON customers.id = orders.customer_id;
+SELECT LOWER('FAHIM') AS lower_name;
+-- Result: fahim
 ```
 
 ---
 
-### 3. RIGHT JOIN (or RIGHT OUTER JOIN)
-Returns **all rows from the right table** and matching rows from the left.
+### 3. CONCAT()
+Combines two or more strings into one.
 
 ```sql
-SELECT *
-FROM orders
-RIGHT JOIN customers ON orders.customer_id = customers.id;
+SELECT CONCAT(first_name, ' ', last_name) AS full_name
+FROM users;
+```
+
+You can also use `||` for concatenation in some SQL dialects.
+
+---
+
+### 4. SUBSTRING()
+Extracts part of a string starting from a given position.
+
+```sql
+SELECT SUBSTRING('Hello World', 1, 5) AS result;
+-- Result: Hello
 ```
 
 ---
 
-### 4. FULL OUTER JOIN
-Returns **all rows from both tables**, with NULLs where there’s no match.
+### 5. TRIM()
+Removes leading and trailing spaces (or specified characters).
 
 ```sql
-SELECT *
-FROM customers
-FULL OUTER JOIN orders ON customers.id = orders.customer_id;
+SELECT TRIM('   fahim   ') AS cleaned_name;
+-- Result: 'fahim'
 ```
 
----
-
-### 5. CROSS JOIN
-Returns the **Cartesian product** – every row of A with every row of B.
+You can also do:
 
 ```sql
-SELECT *
-FROM colors
-CROSS JOIN sizes;
-```
-
----
-
-### 6. SELF JOIN
-A table joined with itself – useful for hierarchical data.
-
-```sql
-SELECT A.name AS Employee, B.name AS Manager
-FROM employees A
-JOIN employees B ON A.manager_id = B.id;
-```
-
----
-
-## 🖼️ Visual Guide
-```plaintext
-Table A         Table B
-
-A1              B1
-A2              B2
-A3              B3
-
-INNER JOIN ➡️ Only matching rows (A2=B2)
-LEFT JOIN  ➡️ All from A + matches from B (fill NULLs where no match)
-RIGHT JOIN ➡️ All from B + matches from A
-FULL JOIN  ➡️ Everything from both
+SELECT TRIM(BOTH 'x' FROM 'xxxhello worldxxx') AS result;
+-- Result: 'hello world'
 ```
 
 ---
 
 ## 🧪 Practice Scenarios
-1. List all customers, even if they haven't placed any orders.
-2. Show all orders, including those without matching customers (data issue).
-3. Get a list of employees and their managers (self-join).
-4. Generate a list of all product and category combinations (cross join).
-5. Find customers who didn’t place any orders (use `LEFT JOIN` + `WHERE IS NULL`).
+
+1. Format all product names to lowercase.
+2. Show first 3 letters of each customer's name.
+3. Concatenate city and state with a comma (e.g., "Chennai, TN").
+4. Remove extra spaces from customer input names.
+5. Convert all email addresses to lowercase for standardization.
+
+---
+
+## 🧠 Tips
+
+- Combine multiple functions for powerful results:
+  ```sql
+  SELECT CONCAT(UPPER(first_name), ' ', LOWER(last_name)) AS formatted_name
+  FROM employees;
+  ```
+- Always `TRIM()` user input when comparing strings.
+- Use `SUBSTRING()` to extract codes, initials, or prefixes.
 
 ---
 
 ## 🔜 Next Up
-On **Day 12**, you'll learn how to **create and modify tables** using `CREATE`, `ALTER`, and `DROP`. This will give you DDL (Data Definition Language) superpowers! 🧙
+On **Day 12**, we dive into **DDL commands** like `CREATE`, `ALTER`, and `DROP` to define and modify your database structures. 📦
 
----
-```markdown
-
-Let me know if you’d like this formatted as a GitHub project README or in a ZIP with all previous days!
+Get ready to take control of your schemas! 🧱
