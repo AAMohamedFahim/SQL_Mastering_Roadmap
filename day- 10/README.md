@@ -1,42 +1,60 @@
-# Day 10: Advanced SQL – Window Functions
+# 📅 Day 10: Advanced SQL – Window Functions
 
-## Navigation
-- [Overview](#overview)
-- [Objectives](#objectives)
-- [Topics Covered](#topics-covered)
+> ✅ *If you're learning Window Functions — this is your one-stop guide. No need to refer to any other resource. It's all here — explained, simplified, and supported with examples and practice problems.*
+
+---
+
+## 🧭 Navigation
+- [📌 Overview](#overview)
+- [🎯 Objectives](#objectives)
+- [📚 Topics Covered](#topics-covered)
   - [1. What is a Window Function?](#1-what-is-a-window-function)
   - [2. Syntax](#2-syntax)
-  - [3. Common Window Functions](#3-common-window-functions)
+  - [3. Example Table](#3-example-table)
+  - [4. Common Window Functions](#4-common-window-functions)
     - [ROW_NUMBER()](#row_number)
     - [RANK()](#rank)
     - [DENSE_RANK()](#dense_rank)
     - [NTILE()](#ntile)
     - [LEAD() & LAG()](#lead--lag)
-    - [SUM(), AVG(), etc. with OVER()](#aggregate-functions-with-over)
-- [Practice Exercises](#practice-exercises)
-- [Next Steps](#next-steps)
+    - [Aggregate Functions with OVER()](#aggregate-functions-with-over)
+- [🧠 Practice Exercises](#practice-exercises)
+- [🚀 Next Steps](#next-steps)
 
 ---
 
-## Overview
-Window functions let you perform **calculations across rows** that are related to the current row, **without collapsing results** like `GROUP BY`.
+## 📌 Overview
 
-They’re great for **ranking**, **running totals**, **moving averages**, and **row comparisons**.
+**Window Functions** allow you to perform calculations across rows that are **related to the current row** — but **without collapsing rows** like `GROUP BY` does.
 
----
-
-## Objectives
-- Learn how to use `OVER()` with different clauses.
-- Apply `ROW_NUMBER()`, `RANK()`, and `DENSE_RANK()` for ranking rows.
-- Use `LEAD()` and `LAG()` for comparing rows.
-- Perform rolling calculations like running totals.
+They are essential when working with:
+- Rankings (1st, 2nd, 3rd, …)
+- Running totals
+- Moving averages
+- Value comparisons between rows
 
 ---
 
-## Topics Covered
+## 🎯 Objectives
+
+By completing this module, you will:
+
+- ✅ Understand how the `OVER()` clause works.
+- ✅ Apply ranking functions like `ROW_NUMBER()`, `RANK()`, `DENSE_RANK()`.
+- ✅ Use `LAG()` and `LEAD()` to compare current vs previous/next rows.
+- ✅ Perform running totals and moving averages using aggregate window functions.
+
+---
+
+## 📚 Topics Covered
+
+---
 
 ### 1. What is a Window Function?
-A window function performs a calculation **across a set of table rows** that are somehow related to the current row — this set is called the "window".
+
+A **Window Function** performs a calculation across a **set of table rows** related to the current row, defined by a window. Unlike `GROUP BY`, it **retains all individual rows** while adding extra calculated fields.
+
+> 💡 Think of it as “GROUP BY + analytics — without collapsing your data.”
 
 ---
 
@@ -53,78 +71,144 @@ SELECT
 FROM table;
 ```
 
-The `OVER()` clause defines the window.
+- `PARTITION BY` divides the data into groups (like GROUP BY)
+- `ORDER BY` orders rows within each partition
+- `ROWS BETWEEN` defines the frame (optional, advanced)
 
 ---
 
-### 3. Common Window Functions
+### 3. Example Table
 
-#### `ROW_NUMBER()`
-Assigns a unique number to each row within a partition.
+Let’s use this sample `employees` table:
+
+| employee_id | name     | department | salary |
+|-------------|----------|------------|--------|
+| 1           | Alice    | HR         | 60,000 |
+| 2           | Bob      | IT         | 80,000 |
+| 3           | Charlie  | IT         | 95,000 |
+| 4           | Diana    | HR         | 75,000 |
+| 5           | Evan     | IT         | 70,000 |
+| 6           | Fiona    | HR         | 85,000 |
+
+---
+
+### 4. Common Window Functions
+
+---
+
+#### 🆔 `ROW_NUMBER()`
+
+Assigns a unique number to each row **within a partition** based on the order.
 
 ```sql
-ROW_NUMBER() OVER (PARTITION BY department ORDER BY salary DESC)
+SELECT name, department, salary,
+  ROW_NUMBER() OVER (PARTITION BY department ORDER BY salary DESC) AS row_num
+FROM employees;
+```
+
+| name   | department | salary | row_num |
+|--------|------------|--------|---------|
+| Fiona  | HR         | 85,000 | 1       |
+| Diana  | HR         | 75,000 | 2       |
+| Alice  | HR         | 60,000 | 3       |
+| Charlie| IT         | 95,000 | 1       |
+| Bob    | IT         | 80,000 | 2       |
+| Evan   | IT         | 70,000 | 3       |
+
+---
+
+#### 🏆 `RANK()`
+
+Ranks rows within a partition — **gives same rank for ties**, with gaps.
+
+```sql
+SELECT name, department, salary,
+  RANK() OVER (PARTITION BY department ORDER BY salary DESC) AS rank
+FROM employees;
 ```
 
 ---
 
-#### `RANK()`
-Gives the same rank to ties, **with gaps**.
+#### 🥇 `DENSE_RANK()`
+
+Like `RANK()`, but **no gaps** between tied ranks.
 
 ```sql
-RANK() OVER (PARTITION BY department ORDER BY salary DESC)
+SELECT name, department, salary,
+  DENSE_RANK() OVER (PARTITION BY department ORDER BY salary DESC) AS dense_rank
+FROM employees;
 ```
 
 ---
 
-#### `DENSE_RANK()`
-Like `RANK()` but **without gaps**.
+#### 🎲 `NTILE(n)`
+
+Distributes rows into `n` **equal groups**.
 
 ```sql
-DENSE_RANK() OVER (PARTITION BY department ORDER BY salary DESC)
+SELECT name, salary,
+  NTILE(3) OVER (ORDER BY salary DESC) AS bucket
+FROM employees;
 ```
 
 ---
 
-#### `NTILE(n)`
-Divides rows into `n` buckets.
+#### ⏪ `LAG()` & ⏩ `LEAD()`
+
+Compare with previous or next row.
 
 ```sql
-NTILE(4) OVER (ORDER BY salary)
+SELECT name, salary,
+  LAG(salary, 1) OVER (ORDER BY salary) AS prev_salary,
+  LEAD(salary, 1) OVER (ORDER BY salary) AS next_salary
+FROM employees;
 ```
+
+| name   | salary | prev_salary | next_salary |
+|--------|--------|-------------|-------------|
+| Alice  | 60000  | NULL        | 70000       |
+| Evan   | 70000  | 60000       | 75000       |
+| Diana  | 75000  | 70000       | 80000       |
+| Bob    | 80000  | 75000       | 85000       |
+| Fiona  | 85000  | 80000       | 95000       |
+| Charlie| 95000  | 85000       | NULL        |
 
 ---
 
-#### `LEAD()` & `LAG()`
-Access next or previous row.
+#### 📊 Aggregate Functions with `OVER()`
+
+You can use window versions of `SUM()`, `AVG()`, `COUNT()` and more.
 
 ```sql
-LAG(salary, 1) OVER (PARTITION BY department ORDER BY salary)
-LEAD(salary, 1) OVER (PARTITION BY department ORDER BY salary)
+SELECT name, department, salary,
+  SUM(salary) OVER (PARTITION BY department ORDER BY salary) AS dept_running_total
+FROM employees;
 ```
+
+This gives a **running total of salary per department**.
 
 ---
 
-#### Aggregate functions with `OVER()`
-Perform running totals, moving averages.
+## 🧠 Practice Exercises
 
-```sql
-SUM(salary) OVER (PARTITION BY department ORDER BY employee_id)
-AVG(score) OVER (ORDER BY test_date ROWS BETWEEN 2 PRECEDING AND CURRENT ROW)
-```
+Try solving these on your own!
 
----
+1. ✅ Use `ROW_NUMBER()` to find the highest-paid employee in each department.
+2. 🎯 Compare `RANK()` vs `DENSE_RANK()` when salaries are tied.
+3. 📦 Divide employees into 3 groups using `NTILE(3)`.
+4. 🔄 Use `LAG()` to find the change in salary from the previous employee.
+5. 💰 Show a running total of salary for the entire company and for each department.
 
-## Practice Exercises
-1. Use `ROW_NUMBER()` to pick the highest-paid employee in each department.
-2. Use `RANK()` and `DENSE_RANK()` to compare their results.
-3. Apply `NTILE(3)` to divide employees into 3 salary bands.
-4. Use `LAG()` to compare this month's sales with last month.
-5. Calculate a running total of purchases per customer.
+> 🧠 Bonus: Combine multiple window functions in one query!
 
 ---
 
 ## Next Steps
-On **Day 11**, you'll get into **SQL Joins Deep Dive** — covering `INNER`, `LEFT`, `RIGHT`, `FULL`, `CROSS`, and practical use cases.
+On **Day 11**, you’ll dive into **SQL String Functions** — mastering `UPPER()`, `LOWER()`, `CONCAT()`, `SUBSTRING()`, `TRIM()` and more.
 
-See you in the Joiniverse! 🌐
+Get ready to manipulate text like a pro in SQL! 🔤
+---
+
+🏁 **Done with Day 10?**  
+If this guide helped you, give the repo a ⭐ and share it with a friend who wants to master SQL!
+
