@@ -18,22 +18,23 @@ This comprehensive SQL study plan covers fundamental, intermediate, and advanced
 ## Study Plan
 
 ### Week 1: SQL Fundamentals
-- **Day 1:** Basic SQL Queries – `SELECT`, `FROM`, `WHERE`, `ORDER BY`
-- **Day 2:** Filtering Data – `WHERE`, `BETWEEN`, `LIKE`, `IN`, `IS NULL`
-- **Day 3:** Sorting & Limiting – `ORDER BY`, `LIMIT`, `OFFSET`
-- **Day 4:** Aggregate Functions – `COUNT()`, `SUM()`, `AVG()`, `MIN()`, `MAX()`
-- **Day 5:** Grouping Data – `GROUP BY`, `HAVING`
-- **Day 6:** Subqueries – Single-row, Multi-row, Correlated Subqueries
-- **Day 7:** Joins – `INNER JOIN`, `LEFT JOIN`, `RIGHT JOIN`, `FULL JOIN`
+- [**Day 1:** Basic SQL Queries – `SELECT`, `FROM`, `WHERE`, `ORDER BY`](./day-%2001/)
+- [**Day 2:** Filtering Data – `WHERE`, `BETWEEN`, `LIKE`, `IN`, `IS NULL`](./day-%2002/)
+- [**Day 3:** Sorting & Limiting – `ORDER BY`, `LIMIT`, `OFFSET`](./day-%2003/)
+- [**Day 4:** Aggregate Functions – `COUNT()`, `SUM()`, `AVG()`, `MIN()`, `MAX()`](./day-%2004/)
+- [**Day 5:** Grouping Data – `GROUP BY`, `HAVING`](./day-%2005/)
+- [**Day 6:** Subqueries – Single-row, Multi-row, Correlated Subqueries](./day-%2006/)
+- [**Day 7:** Joins – `INNER JOIN`, `LEFT JOIN`, `RIGHT JOIN`, `FULL JOIN`](./day-%2007/)
+
 
 ### Week 2: Intermediate SQL
-- **Day 8:** Self Joins and Cross Joins
-- **Day 9:** Common Table Expressions (CTEs) – `WITH` Clause
-- **Day 10:** Window Functions – `ROW_NUMBER()`, `RANK()`, `DENSE_RANK()`, `LEAD()`, `LAG()`
-- **Day 11:** String Functions – `UPPER()`, `LOWER()`, `CONCAT()`, `SUBSTRING()`, `TRIM()`
-- **Day 12:** Date & Time Functions – `NOW()`, `DATEDIFF()`, `EXTRACT()`, `DATE_ADD()`
-- **Day 13:** CASE Statements – Conditional Logic in Queries
-- **Day 14:** Set Operations – `UNION`, `INTERSECT`, `EXCEPT`
+- [**Day 8:** Self Joins and Cross Joins](./day-%2008/)
+- [**Day 9:** Common Table Expressions (CTEs) – `WITH` Clause](./day-%2009/)
+- [**Day 10:** Window Functions – `ROW_NUMBER()`, `RANK()`, `DENSE_RANK()`, `LEAD()`, `LAG()`](./day-%2010/)
+- [**Day 11:** String Functions – `UPPER()`, `LOWER()`, `CONCAT()`, `SUBSTRING()`, `TRIM()`](./day-%2011/)
+- [**Day 12:** Date & Time Functions – `NOW()`, `DATEDIFF()`, `EXTRACT()`, `DATE_ADD()`](./day-%2012/)
+- [**Day 13:** CASE Statements – Conditional Logic in Queries](./day-%2013/)
+- [**Day 14:** Set Operations – `UNION`, `INTERSECT`, `EXCEPT`](./day-%2014/)
 
 ### Week 3: Advanced SQL & Optimization
 - **Day 15:** Indexing – `CREATE INDEX`, Clustered, Non-Clustered
