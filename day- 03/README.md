@@ -47,10 +47,18 @@ ORDER BY salary DESC;
 ## 2. Sorting by Multiple Columns
 You can sort by multiple columns to further refine the result ordering.
 
-**Example:**
+**Example 1:**  
+Sort students first by grade in descending order, and then by name in ascending order.
 ```sql
 SELECT * FROM students
 ORDER BY grade DESC, name ASC;
+```
+
+**Example 2:**  
+Sort results by `percentage` in descending order and then by `contest_id` in ascending order.
+```sql
+SELECT * FROM results
+ORDER BY percentage DESC, contest_id ASC;
 ```
 
 ## 3. LIMIT Clause
