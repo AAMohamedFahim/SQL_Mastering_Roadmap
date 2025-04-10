@@ -48,7 +48,7 @@ SELECT city FROM customers
 UNION
 SELECT city FROM suppliers;
 
--- UNION ALL: Keeps duplicates
+-- UNION ALL: Keeps duplicate
 SELECT city FROM customers
 UNION ALL
 SELECT city FROM suppliers;
