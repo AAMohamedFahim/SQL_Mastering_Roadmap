@@ -8,7 +8,7 @@
   - [2. DATEDIFF()](#2-datediff)
   - [3. EXTRACT()](#3-extract)
   - [4. DATE_ADD()](#4-date_add)
-  - [5. FORMAT()](#5-format)
+  - [5. FORMAT_DATE()](#5-format_date)
 - [🧪 Practice Scenarios](#practice-scenarios)
 - [🧠 Tips](#tips)
 - [🔜 Next Up](#next-up)
@@ -25,7 +25,7 @@ Date and time functions allow you to perform calculations and extract insights b
 - Calculate differences between dates
 - Extract specific components (like year or month)
 - Add or subtract time intervals
-- Format dates for presentation or reports
+- Format dates into readable strings
 
 ---
 
@@ -82,20 +82,31 @@ SELECT DATE_ADD(NOW(), INTERVAL 1 MONTH);
 
 ---
 
-### 5. FORMAT()
-Formats a date value according to a specific pattern — useful for readable outputs.
+### 5. FORMAT_DATE()
+Formats a `DATE` into a readable string using a format pattern.
 
 ```sql
-SELECT FORMAT(NOW(), 'dd-MM-yyyy') AS formatted_date;
+SELECT FORMAT_DATE('%d-%m-%Y', DATE '2025-04-19') AS formatted;
 -- Result: 19-04-2025
 ```
 
-Common format patterns:
-- `'yyyy-MM-dd'`
-- `'MM/dd/yyyy'`
-- `'dd MMM yyyy'`
+Other examples:
+```sql
+SELECT FORMAT_DATE('%B %d, %Y', DATE '2025-04-19');
+-- Result: April 19, 2025
 
-> Note: `FORMAT()` is more common in MySQL and SQL Server. Use `TO_CHAR()` in PostgreSQL for similar results.
+SELECT FORMAT_DATE('%A', DATE '2025-04-19');
+-- Result: Saturday
+```
+
+Common format specifiers:
+- `%Y` = Year (e.g., 2025)
+- `%m` = Month (01–12)
+- `%B` = Full month name
+- `%d` = Day of the month (01–31)
+- `%A` = Full weekday name
+
+> Note: `FORMAT_DATE()` is available in BigQuery. Use `TO_CHAR()` in PostgreSQL or `FORMAT()` in MySQL.
 
 ---
 
@@ -106,7 +117,7 @@ Common format patterns:
 3. Show all records created in the last 30 days.
 4. Calculate the number of months between two dates.
 5. Add 90 days to each subscription start date.
-6. Display registration dates in "dd/MM/yyyy" format.
+6. Format the created_at column to show `dd/MM/yyyy`.
 
 ---
 
@@ -117,8 +128,8 @@ Common format patterns:
   ```sql
   SELECT * FROM sessions WHERE DATEDIFF(NOW(), start_time) > 30;
   ```
-- `EXTRACT()` is useful for creating time-based groupings (e.g., monthly reports).
-- Use `FORMAT()` to generate user-friendly date outputs for reporting.
+- `EXTRACT()` is useful for creating time-based groupings.
+- `FORMAT_DATE()` is perfect for clean, human-friendly output.
 
 ---
 
