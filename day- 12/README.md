@@ -8,6 +8,7 @@
   - [2. DATEDIFF()](#2-datediff)
   - [3. EXTRACT()](#3-extract)
   - [4. DATE_ADD()](#4-date_add)
+  - [5. FORMAT()](#5-format)
 - [🧪 Practice Scenarios](#practice-scenarios)
 - [🧠 Tips](#tips)
 - [🔜 Next Up](#next-up)
@@ -24,6 +25,7 @@ Date and time functions allow you to perform calculations and extract insights b
 - Calculate differences between dates
 - Extract specific components (like year or month)
 - Add or subtract time intervals
+- Format dates for presentation or reports
 
 ---
 
@@ -80,6 +82,23 @@ SELECT DATE_ADD(NOW(), INTERVAL 1 MONTH);
 
 ---
 
+### 5. FORMAT()
+Formats a date value according to a specific pattern — useful for readable outputs.
+
+```sql
+SELECT FORMAT(NOW(), 'dd-MM-yyyy') AS formatted_date;
+-- Result: 19-04-2025
+```
+
+Common format patterns:
+- `'yyyy-MM-dd'`
+- `'MM/dd/yyyy'`
+- `'dd MMM yyyy'`
+
+> Note: `FORMAT()` is more common in MySQL and SQL Server. Use `TO_CHAR()` in PostgreSQL for similar results.
+
+---
+
 ## 🧪 Practice Scenarios
 
 1. Find how many days have passed since a user's last login.
@@ -87,6 +106,7 @@ SELECT DATE_ADD(NOW(), INTERVAL 1 MONTH);
 3. Show all records created in the last 30 days.
 4. Calculate the number of months between two dates.
 5. Add 90 days to each subscription start date.
+6. Display registration dates in "dd/MM/yyyy" format.
 
 ---
 
@@ -98,6 +118,7 @@ SELECT DATE_ADD(NOW(), INTERVAL 1 MONTH);
   SELECT * FROM sessions WHERE DATEDIFF(NOW(), start_time) > 30;
   ```
 - `EXTRACT()` is useful for creating time-based groupings (e.g., monthly reports).
+- Use `FORMAT()` to generate user-friendly date outputs for reporting.
 
 ---
 
