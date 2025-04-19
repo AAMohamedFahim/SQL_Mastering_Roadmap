@@ -258,6 +258,8 @@ SELECT SOUNDEX('Mohamed'), SOUNDEX('Muhammad');
 - Use `SUBSTRING()` to extract codes, initials, or prefixes.
 - Use `LENGTH()` and `POSITION()` for validation and parsing.
 
+## for regex refer
+
 ---
 
 ## 🔍 Dialect Notes
