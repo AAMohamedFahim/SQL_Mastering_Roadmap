@@ -259,6 +259,7 @@ SELECT SOUNDEX('Mohamed'), SOUNDEX('Muhammad');
 - Use `LENGTH()` and `POSITION()` for validation and parsing.
 
 ## for regex refer
+- [Full Regex Guide](regex.md)
 
 ---
 
