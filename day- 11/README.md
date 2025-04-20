@@ -22,6 +22,7 @@
   - [16. SPLIT_PART()](#16-split_part)
   - [17. FORMAT() / TO_CHAR()](#17-format--to_char)
   - [18. SOUNDEX()](#18-soundex)
+  - [19. GROUP_CONCAT() / STRING_AGG()](#19-group_concat--string_agg)
 - [🧪 Practice Scenarios](#practice-scenarios)
 - [🧠 Tips](#tips)
 - [🔍 Dialect Notes](#dialect-notes)
@@ -232,6 +233,31 @@ SELECT SOUNDEX('Mohamed'), SOUNDEX('Muhammad');
 
 ---
 
+### 19. GROUP_CONCAT() / STRING_AGG()
+Concatenates strings from multiple rows into a single string, grouped by another column.
+
+#### ✅ MySQL
+
+```sql
+SELECT 
+    date_column, 
+    GROUP_CONCAT(string_column SEPARATOR ', ') AS combined_strings
+FROM your_table
+GROUP BY date_column;
+```
+
+#### ✅ PostgreSQL
+
+```sql
+SELECT 
+    date_column, 
+    STRING_AGG(string_column, ', ') AS combined_strings
+FROM your_table
+GROUP BY date_column;
+```
+
+---
+
 ## 🧪 Practice Scenarios
 
 1. Format all product names to lowercase.
@@ -244,6 +270,7 @@ SELECT SOUNDEX('Mohamed'), SOUNDEX('Muhammad');
 8. Replace vowels with '*'.
 9. Identify names that sound similar using `SOUNDEX()`.
 10. Title-case all customer names.
+11. Combine all reviews per day using `GROUP_CONCAT()` or `STRING_AGG()`.
 
 ---
 
@@ -269,6 +296,7 @@ SELECT SOUNDEX('Mohamed'), SOUNDEX('Muhammad');
 - `SPLIT_PART()` is available in PostgreSQL; use `STRING_SPLIT()` in SQL Server.
 - `TO_CHAR()` is used in PostgreSQL/Oracle; use `FORMAT()` in SQL Server.
 - String concatenation uses `||` in PostgreSQL and `+` in SQL Server.
+- `GROUP_CONCAT()` is MySQL-specific; PostgreSQL uses `STRING_AGG()`.
 
 ---
 
@@ -276,4 +304,3 @@ SELECT SOUNDEX('Mohamed'), SOUNDEX('Muhammad');
 On **Day 12**, we dive into **DDL commands** like `CREATE`, `ALTER`, and `DROP` to define and modify your database structures. 📦
 
 Get ready to take control of your schemas! 🧱
-
