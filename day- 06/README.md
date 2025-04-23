@@ -8,6 +8,7 @@
   - [2. Single-row Subquery](#2-single-row-subquery)
   - [3. Multi-row Subquery](#3-multi-row-subquery)
   - [4. Correlated Subquery](#4-correlated-subquery)
+    - [4.1 EXISTS and NOT EXISTS](#41-exists-and-not-exists)
 - [Practice Exercises](#practice-exercises)
 - [Next Steps](#next-steps)
 
@@ -23,7 +24,8 @@ Day 6 introduces **subqueries**—SQL queries nested inside another query. You�
 1. What is a Subquery?  
 2. Single-row Subquery  
 3. Multi-row Subquery  
-4. Correlated Subquery
+4. Correlated Subquery  
+   4.1 EXISTS and NOT EXISTS
 
 ---
 
@@ -88,6 +90,33 @@ WHERE salary > (
 );
 ```
 
+### 4.1 EXISTS and NOT EXISTS
+`EXISTS` is used to check if a **subquery returns any rows**. It's efficient for checking the presence of related data without returning it.
+
+**EXISTS Example:**
+```sql
+SELECT name
+FROM employees e
+WHERE EXISTS (
+  SELECT 1
+  FROM departments d
+  WHERE d.manager_id = e.id
+);
+```
+
+**NOT EXISTS Example:**
+```sql
+SELECT name
+FROM employees e
+WHERE NOT EXISTS (
+  SELECT 1
+  FROM departments d
+  WHERE d.manager_id = e.id
+);
+```
+
+Use `EXISTS` for performance in cases where you don't need the actual data from the subquery — just whether it exists or not.
+
 ---
 
 ## Practice Exercises
@@ -96,6 +125,8 @@ WHERE salary > (
 3. Get names of employees who earn more than the average salary of their department.
 4. Find departments where no employee earns more than $70,000.
 5. List all employees in regions that have more than one department.
+6. Use `EXISTS` to list employees who manage at least one department.
+7. Use `NOT EXISTS` to list employees who do **not** manage any department.
 
 ---
 
