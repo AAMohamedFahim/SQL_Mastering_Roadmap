@@ -127,6 +127,14 @@ SELECT name, department, salary,
 FROM employees;
 ```
 
+| Name | Score | Rank |                                   |
+| ---- | ----- | ---- | --------------------------------- |
+| A    | 100   | 1    |                                   |
+| B    | 90    | 2    |                                   |
+| C    | 90    | 2    |                                   |
+| D    | 80    | 4    | ← **(Notice the gap from 2 → 4)** |
+
+
 ---
 
 #### 🥇 `DENSE_RANK()`
@@ -138,6 +146,13 @@ SELECT name, department, salary,
   DENSE_RANK() OVER (PARTITION BY department ORDER BY salary DESC) AS dense_rank
 FROM employees;
 ```
+| Name | Score | Dense\_Rank |                                  |
+| ---- | ----- | ----------- | -------------------------------- |
+| A    | 100   | 1           |                                  |
+| B    | 90    | 2           |                                  |
+| C    | 90    | 2           |                                  |
+| D    | 80    | 3           | ← **(No gap, continuous ranks)** |
+
 
 ---
 
