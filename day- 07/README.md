@@ -27,6 +27,16 @@ Day 7 dives into **SQL Joins**, which are used to combine rows from two or more 
 4. RIGHT JOIN  
 5. FULL JOIN
 
+| Join Type                         | Purpose                                                                     | Example Scenario                                  |
+| --------------------------------- | --------------------------------------------------------------------------- | ------------------------------------------------- |
+| **INNER JOIN**                    | Returns only matching rows from both tables                                 | Customers with Orders                             |
+| **LEFT JOIN (LEFT OUTER JOIN)**   | Returns all rows from left table + matching rows from right                 | All Customers even if they have no Orders         |
+| **RIGHT JOIN (RIGHT OUTER JOIN)** | Returns all rows from right table + matching rows from left                 | All Orders even if customer details are missing   |
+| **FULL JOIN (FULL OUTER JOIN)**   | Returns all rows when there is a match in one of the tables (left or right) | All Customers and all Orders, even unmatched ones |
+| **CROSS JOIN**                    | Returns **cartesian product** (all possible combinations)                   | Pair every customer with every product            |
+| **SELF JOIN**                     | Join a table with itself                                                    | Find employees who report to other employees      |
+
+
 ---
 
 ## 1. What are Joins?
