@@ -93,6 +93,13 @@ Removes leading and trailing spaces (or specified characters).
 SELECT TRIM('   fahim   ') AS cleaned_name;
 -- Result: 'fahim'
 ```
+| Usage                     | Query                                     | Result        |
+| ------------------------- | ----------------------------------------- | ------------- |
+| **Leading Trim**          | `TRIM(LEADING 'x' FROM 'xxxhello')`       | `hello`       |
+| **Trailing Trim**         | `TRIM(TRAILING 'x' FROM 'helloxxx')`      | `hello`       |
+| **Both Sides**            | `TRIM(BOTH 'x' FROM 'xxxhello worldxxx')` | `hello world` |
+| **Default Trim (spaces)** | `TRIM('  hello world  ')`                 | `hello world` |
+
 
 You can also do:
 
