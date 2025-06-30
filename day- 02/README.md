@@ -57,6 +57,14 @@ The `LIKE` operator is used for pattern matching.
 SELECT * FROM customers WHERE name LIKE 'A%';
 ```
 
+| Condition              | Query        |
+| ---------------------- | ------------ |
+| Starts with `A`        | `LIKE 'A%'`  |
+| Ends with `A`          | `LIKE '%A'`  |
+| Contains `A` anywhere  | `LIKE '%A%'` |
+| Exact Match (only `A`) | `= 'A'`      |
+
+
 ## 4. IN Operator
 The `IN` operator is used to specify multiple possible values for a column.
 
