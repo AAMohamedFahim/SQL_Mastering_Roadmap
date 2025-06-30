@@ -170,6 +170,55 @@ SELECT REVERSE('abc') AS rev;
 
 ---
 
+
+| Pattern | Meaning                      | Matches Example                               |
+| ------- | ---------------------------- | --------------------------------------------- |
+| `.`     | Any single character         | `a`, `1`, `@`                                 |
+| `^`     | Start of string              | `^Hello` → Only strings starting with `Hello` |
+| `$`     | End of string                | `world$` → Only strings ending with `world`   |
+| `*`     | 0 or more occurrences        | `a*` → \`\`, `a`, `aa`, `aaa`                 |
+| `+`     | 1 or more occurrences        | `a+` → `a`, `aa`, `aaa`                       |
+| `?`     | 0 or 1 occurrence (optional) | `colou?r` → `color`, `colour`                 |
+| `{n}`   | Exactly n times              | `\d{3}` → 3 digits like `123`                 |
+| `{n,}`  | At least n times             | `\d{2,}` → `12`, `123`, `1234`                |
+| `{n,m}` | Between n and m times        | `\d{2,4}` → `12`, `123`, `1234`               |
+
+
+| Pattern         | Meaning                                        | Example            |
+| --------------- | ---------------------------------------------- | ------------------ |
+| `[abc]`         | Any one of a, b, c                             | `a`, `b`, or `c`   |
+| `[^abc]`        | Any character except a, b, c                   | `d`, `x`           |
+| `[a-z]`         | Any lowercase letter                           | `a`, `m`, `z`      |
+| `[A-Z]`         | Any uppercase letter                           | `A`, `M`, `Z`      |
+| `[0-9]` or `\d` | Any digit                                      | `1`, `7`           |
+| `\D`            | Non-digit                                      | `a`, `!`           |
+| `\s`            | Any whitespace (space, tab)                    | Space, Tab         |
+| `\S`            | Non-whitespace                                 | `a`, `1`           |
+| `\w`            | Any word character (letter, digit, underscore) | `a`, `Z`, `1`, `_` |
+| `\W`            | Non-word character                             | `@`, `#`, space    |
+
+| Task                      | Regex                                            |
+| ------------------------- | ------------------------------------------------ |
+| Starts with `A`           | `^A`                                             |
+| Ends with `Z`             | `Z$`                                             |
+| Contains a digit          | `\d`                                             |
+| Contains only digits      | `^\d+$`                                          |
+| Email validation (simple) | `[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}` |
+| Phone Number (10 digits)  | `^\d{10}$`                                       |
+| Alphanumeric only         | `^[a-zA-Z0-9]+$`                                 |
+
+| Task                      | Regex                                            |
+| ------------------------- | ------------------------------------------------ |
+| Starts with `A`           | `^A`                                             |
+| Ends with `Z`             | `Z$`                                             |
+| Contains a digit          | `\d`                                             |
+| Contains only digits      | `^\d+$`                                          |
+| Email validation (simple) | `[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}` |
+| Phone Number (10 digits)  | `^\d{10}$`                                       |
+| Alphanumeric only         | `^[a-zA-Z0-9]+$`                                 |
+
+
+
 ### 12. REGEXP_REPLACE()
 Replaces substrings that match a regular expression.
 
